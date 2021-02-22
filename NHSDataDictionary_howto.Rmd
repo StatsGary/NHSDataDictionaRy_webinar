@@ -1,0 +1,236 @@
+---
+title: "NHSDataDictionaRy package"
+author: "Gary Hutson - Head of Advanced Analytics"
+date: "21/04/2021"
+output:
+  html_document:
+    theme: lumen
+    highlight: tango
+    toc: true
+    number_sections: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<a href="https://cran.r-project.org/web/packages/NHSDataDictionaRy/index.html"><img src="man/figures/logo.png" align="right"></a>
+
+
+# Loading the package
+
+To load the package, you can use the below command:
+
+```{r setup_libs, echo=FALSE}
+library(NHSDataDictionaRy)
+library(dplyr)
+library(magrittr)
+library(tibble)
+```
+
+# Accessing the NHS data links
+
+This function expects no return and is a way to query the NHS Data Dictionary database to get the most recent list of data elements and their associated lookups. The return of this will provide a tibble of all the links currently on the NHS Data Dictionary website:
+
+```{r extracting_dd}
+nhs_tibble <- NHSDataDictionaRy::nhs_data_elements()
+print(head(nhs_tibble))
+```
+This tibble gives a list of all lookups and their associated xpath codes i.e. a direct link to an HTML element, which is the standard way of extracting HTML DOM content. This is where the other functions in the package become powerful. 
+
+# Get all current hyperlinks from a webpage using linkScrapR
+
+This function can analyse a website and get all the current hyperlinks of a website. This function is used to produce the nhs_data_elements() function, as it calls this function to analyse all the current hyperlinks on the NHS Data Dictionary package, but my example shows an example of scraping the NHSR community website to access the links:
+
+```{r link_scrapeR}
+# Analyse all the links on a website
+website_url <- "https://nhsrcommunity.com/home/webinars/"
+results <- NHSDataDictionaRy::linkScrapeR(website_url)
+print(tail(results, 20))
+
+subset_results <- slice(results, 16)
+print(subset_results)
+
+```
+
+
+# Opening a URL from R into a web browser
+To navigate to the specific URL you can use the utils::browseURL command:
+```{r browse_url}
+#This opens the 18th result of the URL
+browseURL(subset_results$url)
+
+```
+# Working with the NHS R Data Dictionary lookup
+
+This package provides functionality for working with the nhs_data_elements extracted from the NHS Data Dictionary website. The two main useful function to extract elements are the tableR function and the xPathTextR function. These can work with the tibble returned to extract useful lookups.
+
+## tableR function (utilising scrapeR function)
+
+The scrapeR function is the workhorse, but the tableR wraps the results of the function in a nice tibble output. This will show you how to utilise the return tibble and to pass the function through the tableR to scrape a tibble to be utilised for lookups:
+
+```{r tableR_example}
+# Filter by a specific lookup required
+reduced_tibble <- 
+  dplyr::filter(nhs_tibble, link_name == "ACTIVITY TREATMENT FUNCTION CODE")
+
+#Use the tableR function to query the NHS Data Dictionary website and return the associate tibble
+
+national_codes <- NHSDataDictionaRy::tableR(url=reduced_tibble$full_url,
+                          xpath = reduced_tibble$xpath_nat_code, 
+                          title = "NHS Hospital Activity Treatment Function National Codes")
+
+default_codes <- NHSDataDictionaRy::tableR(url=reduced_tibble$full_url,
+                          xpath = reduced_tibble$xpath_default_code, 
+                          title = "NHS Hospital Activity Treatment Function Default Codes")
+
+
+# Here you could merge the codes - as you will have national and default codes
+
+merged_frame <- national_codes %>% 
+  dplyr::bind_rows(default_codes)
+
+
+# The query has returned results, if the url does not have a lookup table an error will be thrown
+
+print(head(national_codes,10))
+print(head(default_codes), 10)
+print(head(merged_frame))
+
+  
+```
+
+Not all lookups will have associated national code tables, if they are not returned you will receive a message saying the lookup table is not available for this NHS Data Dictionary type. 
+
+## Using my lookup with NHS data 
+
+There are common lookups that are needed, and this is one such mapping between specialty code, to get the description of the specialty unit description. I will show an example with a made up data frame to illustrate the use case for these lookups and to have up to date lookups:
+
+
+```{r lookup_fields}
+
+act_aggregations <- tibble(SpecCode = as.character(c(101,102,103, 104, 105)),
+                             ActivityCounts = round(rnorm(5,250,3),0), 
+                             Month = rep("May", 5))
+
+# Use dplyr to join the NHS activity by specialty code
+
+act_aggregations %>% 
+  left_join(merged_frame, by = c("SpecCode"="Code"))
+  
+# This easily joins the lookup on to your data
+  
+```
+
+
+The benefit of having it in an R package is that you can instantaneously have a lookup of the most relevant and up to date NHS lookups, replacing the need to have a massive data warehouse to capture this information. 
+
+## Combine into one function
+
+The routine could be made simpiler by combining into one function:
+
+```{r function}
+
+merged_frameR <- function(filter_param){
+  # Filter based on passed parameter
+  reduced_tibble <- 
+    dplyr::filter(nhs_tibble, link_name == filter_param)
+  
+  # Use NHSDataDictionaRy to return the codes needed for default and national
+  national_codes <- NHSDataDictionaRy::tableR(url=reduced_tibble$full_url,
+                           xpath = reduced_tibble$xpath_nat_code, 
+                           title = paste(filter_param, " - NATIONAL CODES"))
+  
+  default_codes   <- NHSDataDictionaRy::tableR(url=reduced_tibble$full_url,
+                      xpath = reduced_tibble$xpath_default_code, 
+                      title = paste(filter_param, " - DEFAULT CODES"))
+  
+  # Check whether the national codes or default codes return anything
+  if (length(national_codes)>0 | length(default_codes)>0){
+    merged_frame <- national_codes %>% 
+    dplyr::bind_rows(default_codes)
+    # Return the merged frame if this condition is passed
+    return(merged_frame)
+    
+  } else{
+    stop("No lookup exists for this code set")
+    # Kill the function
+  }
+
+
+}
+
+
+# Use the function we have created to pass the name of the lookup
+tail(merged_frameR("ACTIVITY TREATMENT FUNCTION CODE"), 10)
+
+
+```
+
+# xpathTextR function
+
+This function has been provided to return elements from a website, other than html tables, as these functions predominately work with tables. The below example shows how this can be implemented, but requires the retrieval of the xpath via the Inspect command in Google Chrome (CTRL + SHIFT + I):
+
+```{r xpath_text}
+
+url <- "https://datadictionary.nhs.uk/data_elements/abbreviated_mental_test_score.html"
+xpath_element <- '//*[@id="element_abbreviated_mental_test_score.description"]'
+
+# Run the xpathTextR function to retrieve details of the element retrieved
+
+result_list <- NHSDataDictionaRy::xpathTextR(url, xpath_element)
+print(result_list)
+
+```
+
+## Cleaning the text example
+
+The example below shows how the text could be cleaned once it is retrieved:
+
+```{r cleaned_text}
+# Use the returned result and do some text processing
+clean_text <- trimws(unlist(result_list$result))
+clean_text <- clean_text %>% 
+  gsub("[\r\n]", "", .) %>% #Remove new line and breaks
+  trimws() %>% #Get rid of any white space
+  as.character() #Cast to a character vector
+
+print(clean_text)
+
+```
+
+## Manipulating the text with Excel like string functions
+These functions have been created for users transitioning from Excel to R:
+
+```{r text_options}
+# Use the left_xl function to extract the first 11 characters
+left_clean <- NHSDataDictionaRy::left_xl(clean_text, 11)
+print(left_clean)
+# Use the right string to extract the score range
+right_clean <- NHSDataDictionaRy::right_xl(clean_text, 8)
+print(right_clean)
+#Use the mid function to look in the middle of the string
+mid_clean <- trimws(NHSDataDictionaRy::mid_xl(clean_text, 15, 42))
+print(mid_clean)
+#Get the text length 
+full_string <- len_xl(clean_text)
+mid_clean_len <- len_xl(mid_clean)
+#Print the length of both strings - the original and mid string extracted text
+cat(paste0("The original string length was: ", full_string, "\n", "The mid_xl cleaned string length is: ", 
+          mid_clean_len))
+
+
+```
+
+# Wrapping up
+More functionality continues to be added to this package, so make sure that you keep up to date with the new developments. CRAN will automatically pull the most recent version down from the website. 
+
+This package would not be possible without the funding and support of the NHS-R community. A big thanks to all the team there. 
+
+<br>
+<a href="https://nhsrcommunity.com/"><img src="man/figures/nhsr.png"></a>
+</br>
+
+
