@@ -10,6 +10,9 @@ This webinar was designed to build an understanding of how to use the NHSDataDic
 
 I will show how to code out the issues in the webinar and take you through step by step how to use the package. 
 
+# Learn how to use it
+The official vignette shows how to use the  [package:](https://cran.r-project.org/web/packages/NHSDataDictionaRy/vignettes/introduction.html).
+
 ## Signing off
 If you have enjoyed this webinar then please drop me a line at [@StatsGary](https://twitter.com/StatsGary). I am currently working as the Head of Advanced Analytics for [Arden and Greater East Midlands CSU](https://www.ardengemcsu.nhs.uk/) and I would be happy to take any questions via email: <g.hutson@nhs.net>.
 
