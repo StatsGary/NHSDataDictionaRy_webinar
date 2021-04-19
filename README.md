@@ -2,6 +2,7 @@
 
 
 ![](man/figures/logo.png)
+<br></br>
 ![](man/figures/nhsr.png)
 
 This webinar was designed to build an understanding of how to use the NHSDataDictionaRy package and what it does. I will take you through the functionality and how to utilise it in this webinar. The webinar will also be made available on the NHS-R community website and YouTube channels. I would like to thank the team at NHS-R community for allowing me time to develop this package. 
