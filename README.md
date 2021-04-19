@@ -11,7 +11,7 @@ This webinar was designed to build an understanding of how to use the NHSDataDic
 I will show how to code out the issues in the webinar and take you through step by step how to use the package. 
 
 ## Learn how to use it
-The official vignette shows how to use the  [package:](https://cran.r-project.org/web/packages/NHSDataDictionaRy/vignettes/introduction.html).
+The official vignette shows how to use the  [package:](https://rdrr.io/cran/NHSDataDictionaRy/f/vignettes/introduction.Rmd).
 
 The supporting html document for the actual webinar can be sourced from the GitHub repo, which supports this training: [GitHub repository tutorial](https://hutsons-hacks.info/wp-content/uploads/2021/02/NHSDataDictionary_howto.html).
 
