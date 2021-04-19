@@ -1,7 +1,7 @@
 # NHSDataDictionaRy webinar
 
 
-<img src ="man/figures/logo.png" align="right">
+<img src ="man/figures/logobgr.png" align="right">
 <br></br>
 ![](man/figures/nhsr.png)
 
