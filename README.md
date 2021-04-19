@@ -3,9 +3,9 @@
 
 <img src ="man/figures/logobgr.png" align="right">
 <br></br>
-![](man/figures/nhsr.png)
 
-This webinar was designed to build an understanding of how to use the NHSDataDictionaRy package and what it does. I will take you through the functionality and how to utilise it in this webinar. The webinar will also be made available on the NHS-R community website and YouTube channels. I would like to thank the team at NHS-R community for allowing me time to develop this package. 
+
+This webinar was designed to build an understanding of how to use the NHSDataDictionaRy package and what it does. I will take you through the functionality and how to utilise it in this webinar. The webinar will also be made available on the NHS-R community website and YouTube channels. I would like to thank the team at [NHS-R community](https://nhsrcommunity.com/) for allowing me time to develop this package. 
 
 ## Installing the package
 The most recent version of the package is on GitHub:
@@ -34,9 +34,11 @@ The official vignette shows how to use the  [package](https://rdrr.io/cran/NHSDa
 
 The supporting html document for the actual webinar can be sourced from the GitHub repo, which supports this training: [GitHub repository tutorial](https://hutsons-hacks.info/wp-content/uploads/2021/04/NHSDataDictionary_howto.html).
 
-## Signing off
+## Signing off and stay posted
 If you have enjoyed this webinar then please drop me a line at [@StatsGary](https://twitter.com/StatsGary). 
 
 I am currently working as the Head of Advanced Analytics for [Arden and Greater East Midlands CSU](https://www.ardengemcsu.nhs.uk/) and I would be happy to take any questions via email: <g.hutson@nhs.net>.
+
+![](man/figures/nhsr.png)
 
 
