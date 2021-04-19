@@ -6,14 +6,25 @@
 
 This webinar was designed to build an understanding of how to use the NHSDataDictionaRy package and what it does. I will take you through the functionality and how to utilise it in this webinar. The webinar will also be made available on the NHS-R community website and YouTube channels. I would like to thank the team at NHS-R community for allowing me time to develop this package. 
 
+## Installing the package
+The most recent version of the package is on GitHub:
+
+``` r
+#install.packages("remotes")
+remotes::install_github("https://github.com/StatsGary/NHSDataDictionaRy")
+
+```
+
+The package will get uploaded to CRAN again in May - once all the changes have been finalised. 
+
 ## What's in the webinar
 
 I will show how to code out the issues in the webinar and take you through step by step how to use the package. 
 
 ## Learn how to use it
-The official vignette shows how to use the  [package:](https://rdrr.io/cran/NHSDataDictionaRy/f/vignettes/introduction.Rmd).
+The official vignette shows how to use the  [package](https://rdrr.io/cran/NHSDataDictionaRy/f/vignettes/introduction.Rmd).
 
-The supporting html document for the actual webinar can be sourced from the GitHub repo, which supports this training: [GitHub repository tutorial](https://hutsons-hacks.info/wp-content/uploads/2021/02/NHSDataDictionary_howto.html).
+The supporting html document for the actual webinar can be sourced from the GitHub repo, which supports this training: [GitHub repository tutorial](https://hutsons-hacks.info/wp-content/uploads/2021/04/NHSDataDictionary_howto.html).
 
 ## Signing off
 If you have enjoyed this webinar then please drop me a line at [@StatsGary](https://twitter.com/StatsGary). 
