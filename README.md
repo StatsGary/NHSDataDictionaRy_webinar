@@ -19,7 +19,14 @@ The package will get uploaded to CRAN again in May - once all the changes have b
 
 ## What's in the webinar
 
-I will show how to code out the issues in the webinar and take you through step by step how to use the package. 
+I will show how to code out the issues in the webinar and take you through step by step how to use the package. This webinar will include:
+
+- What is the package and the benefits of using the package
+- What was the motivation for the package
+- How to use the package
+- Where to get the supporting guidance for the package
+
+This guidance can also be found in the next section.
 
 ## Learn how to use it
 The official vignette shows how to use the  [package](https://rdrr.io/cran/NHSDataDictionaRy/f/vignettes/introduction.Rmd).
