@@ -1672,20 +1672,12 @@ div.tocify {
 <div id="loading-the-package" class="section level1">
 <h1><span class="header-section-number">1</span> Loading the package</h1>
 <p>To load the package, you can use the below command:</p>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
 </div>
 <div id="accessing-the-nhs-data-links" class="section level1">
 <h1><span class="header-section-number">2</span> Accessing the NHS data links</h1>
 <p>This function expects no return and is a way to query the NHS Data Dictionary database to get the most recent list of data elements and their associated lookups. The return of this will provide a tibble of all the links currently on the NHS Data Dictionary website:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>nhs_tibble &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">nhs_data_elements</span>()</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">print</span>(<span class="kw">head</span>(nhs_tibble))</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>nhs_tibble &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">nhs_data_elements</span>()</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">print</span>(<span class="kw">head</span>(nhs_tibble))</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 6
 ##   link_name  url    full_url  xpath_nat_code  xpath_default_co~ xpath_also_known
 ##   &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;             &lt;chr&gt;           
@@ -1700,10 +1692,10 @@ div.tocify {
 <div id="get-all-current-hyperlinks-from-a-webpage-using-linkscrapr" class="section level1">
 <h1><span class="header-section-number">3</span> Get all current hyperlinks from a webpage using linkScrapR</h1>
 <p>This function can analyse a website and get all the current hyperlinks of a website. This function is used to produce the nhs_data_elements() function, as it calls this function to analyse all the current hyperlinks on the NHS Data Dictionary package, but my example shows an example of scraping the NHSR community website to access the links:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Analyse all the links on a website</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>website_url &lt;-<span class="st"> &quot;https://nhsrcommunity.com/home/webinars/&quot;</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>results &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">linkScrapeR</span>(website_url)</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">print</span>(<span class="kw">tail</span>(results, <span class="dv">20</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Analyse all the links on a website</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>website_url &lt;-<span class="st"> &quot;https://nhsrcommunity.com/home/webinars/&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>results &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">linkScrapeR</span>(website_url)</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">print</span>(<span class="kw">tail</span>(results, <span class="dv">20</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 20 x 2
 ##    link_name                    url                                             
 ##    &lt;chr&gt;                        &lt;chr&gt;                                           
@@ -1727,8 +1719,8 @@ div.tocify {
 ## 18 &quot;\r\n\t\t\t\t\t\t\t\t&quot;       http://www.aphanalysts.org/                     
 ## 19 &quot;View our Privacy Policy&quot;    /privacy-policy                                 
 ## 20 &quot;Website by Verge Design&quot;    https://vergedesign.co.uk</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>subset_results &lt;-<span class="st"> </span><span class="kw">slice</span>(results, <span class="dv">16</span>)</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">print</span>(subset_results)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>subset_results &lt;-<span class="st"> </span><span class="kw">slice</span>(results, <span class="dv">16</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">print</span>(subset_results)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##   link_name  url                            
 ##   &lt;chr&gt;      &lt;chr&gt;                          
@@ -1737,8 +1729,8 @@ div.tocify {
 <div id="opening-a-url-from-r-into-a-web-browser" class="section level1">
 <h1><span class="header-section-number">4</span> Opening a URL from R into a web browser</h1>
 <p>To navigate to the specific URL you can use the utils::browseURL command:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">#This opens the 18th result of the URL</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">browseURL</span>(subset_results<span class="op">$</span>url)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">#This opens the 18th result of the URL</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">browseURL</span>(subset_results<span class="op">$</span>url)</span></code></pre></div>
 </div>
 <div id="working-with-the-nhs-r-data-dictionary-lookup" class="section level1">
 <h1><span class="header-section-number">5</span> Working with the NHS R Data Dictionary lookup</h1>
@@ -1746,143 +1738,100 @@ div.tocify {
 <div id="tabler-function-utilising-scraper-function" class="section level2">
 <h2><span class="header-section-number">5.1</span> tableR function (utilising scrapeR function)</h2>
 <p>The scrapeR function is the workhorse, but the tableR wraps the results of the function in a nice tibble output. This will show you how to utilise the return tibble and to pass the function through the tableR to scrape a tibble to be utilised for lookups:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Filter by a specific lookup required</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>reduced_tibble &lt;-<span class="st"> </span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(nhs_tibble, link_name <span class="op">==</span><span class="st"> &quot;ACTIVITY TREATMENT FUNCTION CODE&quot;</span>)</span>
-<span id="cb11-4"><a href="#cb11-4"></a></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#Use the tableR function to query the NHS Data Dictionary website and return the associate tibble</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a></span>
-<span id="cb11-7"><a href="#cb11-7"></a>national_codes &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">tableR</span>(<span class="dt">url=</span>reduced_tibble<span class="op">$</span>full_url,</span>
-<span id="cb11-8"><a href="#cb11-8"></a>                          <span class="dt">xpath =</span> reduced_tibble<span class="op">$</span>xpath_nat_code, </span>
-<span id="cb11-9"><a href="#cb11-9"></a>                          <span class="dt">title =</span> <span class="st">&quot;NHS Hospital Activity Treatment Function National Codes&quot;</span>)</span>
-<span id="cb11-10"><a href="#cb11-10"></a></span>
-<span id="cb11-11"><a href="#cb11-11"></a>default_codes &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">tableR</span>(<span class="dt">url=</span>reduced_tibble<span class="op">$</span>full_url,</span>
-<span id="cb11-12"><a href="#cb11-12"></a>                          <span class="dt">xpath =</span> reduced_tibble<span class="op">$</span>xpath_default_code, </span>
-<span id="cb11-13"><a href="#cb11-13"></a>                          <span class="dt">title =</span> <span class="st">&quot;NHS Hospital Activity Treatment Function Default Codes&quot;</span>)</span>
-<span id="cb11-14"><a href="#cb11-14"></a></span>
-<span id="cb11-15"><a href="#cb11-15"></a></span>
-<span id="cb11-16"><a href="#cb11-16"></a><span class="co"># Here you could merge the codes - as you will have national and default codes</span></span>
-<span id="cb11-17"><a href="#cb11-17"></a></span>
-<span id="cb11-18"><a href="#cb11-18"></a>merged_frame &lt;-<span class="st"> </span>national_codes <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb11-19"><a href="#cb11-19"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">bind_rows</span>(default_codes)</span>
-<span id="cb11-20"><a href="#cb11-20"></a></span>
-<span id="cb11-21"><a href="#cb11-21"></a></span>
-<span id="cb11-22"><a href="#cb11-22"></a><span class="co"># The query has returned results, if the url does not have a lookup table an error will be thrown</span></span>
-<span id="cb11-23"><a href="#cb11-23"></a></span>
-<span id="cb11-24"><a href="#cb11-24"></a><span class="kw">print</span>(<span class="kw">head</span>(national_codes,<span class="dv">10</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Filter by a specific lookup required</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>reduced_tibble &lt;-<span class="st"> </span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(nhs_tibble, link_name <span class="op">==</span><span class="st"> &quot;ACTIVITY TREATMENT FUNCTION CODE&quot;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#Use the tableR function to query the NHS Data Dictionary website and return the associate tibble</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a>national_codes &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">tableR</span>(<span class="dt">url=</span>reduced_tibble<span class="op">$</span>full_url,</span>
+<span id="cb8-8"><a href="#cb8-8"></a>                          <span class="dt">xpath =</span> reduced_tibble<span class="op">$</span>xpath_nat_code, </span>
+<span id="cb8-9"><a href="#cb8-9"></a>                          <span class="dt">title =</span> <span class="st">&quot;NHS Hospital Activity Treatment Function National Codes&quot;</span>)</span>
+<span id="cb8-10"><a href="#cb8-10"></a></span>
+<span id="cb8-11"><a href="#cb8-11"></a></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co"># The query has returned results, if the url does not have a lookup table an error will be thrown</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="kw">print</span>(<span class="kw">head</span>(national_codes,<span class="dv">10</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 4
 ##    Code  Description              Dict_Type                  DttmExtracted      
 ##    &lt;chr&gt; &lt;chr&gt;                    &lt;chr&gt;                      &lt;dttm&gt;             
-##  1 100   General Surgery Service  NHS Hospital Activity Tre~ 2021-02-22 16:42:02
-##  2 101   Urology Service          NHS Hospital Activity Tre~ 2021-02-22 16:42:02
-##  3 102   Transplant Surgery Serv~ NHS Hospital Activity Tre~ 2021-02-22 16:42:02
-##  4 103   Breast Surgery Service   NHS Hospital Activity Tre~ 2021-02-22 16:42:02
-##  5 104   Colorectal Surgery Serv~ NHS Hospital Activity Tre~ 2021-02-22 16:42:02
-##  6 105   Hepatobiliary and Pancr~ NHS Hospital Activity Tre~ 2021-02-22 16:42:02
-##  7 106   Upper Gastrointestinal ~ NHS Hospital Activity Tre~ 2021-02-22 16:42:02
-##  8 107   Vascular Surgery Service NHS Hospital Activity Tre~ 2021-02-22 16:42:02
-##  9 108   Spinal Surgery Service   NHS Hospital Activity Tre~ 2021-02-22 16:42:02
-## 10 109   Bariatric Surgery Servi~ NHS Hospital Activity Tre~ 2021-02-22 16:42:02</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">print</span>(<span class="kw">head</span>(default_codes), <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 4
-##   Code  Description                   Dict_Type              DttmExtracted      
-##   &lt;chr&gt; &lt;chr&gt;                         &lt;chr&gt;                  &lt;dttm&gt;             
-## 1 199   Non-UK provider; TREATMENT F~ NHS Hospital Activity~ 2021-02-22 16:42:03
-## 2 499   Non-UK provider; TREATMENT F~ NHS Hospital Activity~ 2021-02-22 16:42:03</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">print</span>(<span class="kw">head</span>(merged_frame))</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 4
-##   Code  Description              Dict_Type                   DttmExtracted      
-##   &lt;chr&gt; &lt;chr&gt;                    &lt;chr&gt;                       &lt;dttm&gt;             
-## 1 100   General Surgery Service  NHS Hospital Activity Trea~ 2021-02-22 16:42:02
-## 2 101   Urology Service          NHS Hospital Activity Trea~ 2021-02-22 16:42:02
-## 3 102   Transplant Surgery Serv~ NHS Hospital Activity Trea~ 2021-02-22 16:42:02
-## 4 103   Breast Surgery Service   NHS Hospital Activity Trea~ 2021-02-22 16:42:02
-## 5 104   Colorectal Surgery Serv~ NHS Hospital Activity Trea~ 2021-02-22 16:42:02
-## 6 105   Hepatobiliary and Pancr~ NHS Hospital Activity Trea~ 2021-02-22 16:42:02</code></pre>
+##  1 100   General Surgery Service  NHS Hospital Activity Tre~ 2021-04-19 11:57:49
+##  2 101   Urology Service          NHS Hospital Activity Tre~ 2021-04-19 11:57:49
+##  3 102   Transplant Surgery Serv~ NHS Hospital Activity Tre~ 2021-04-19 11:57:49
+##  4 103   Breast Surgery Service   NHS Hospital Activity Tre~ 2021-04-19 11:57:49
+##  5 104   Colorectal Surgery Serv~ NHS Hospital Activity Tre~ 2021-04-19 11:57:49
+##  6 105   Hepatobiliary and Pancr~ NHS Hospital Activity Tre~ 2021-04-19 11:57:49
+##  7 106   Upper Gastrointestinal ~ NHS Hospital Activity Tre~ 2021-04-19 11:57:49
+##  8 107   Vascular Surgery Service NHS Hospital Activity Tre~ 2021-04-19 11:57:49
+##  9 108   Spinal Surgery Service   NHS Hospital Activity Tre~ 2021-04-19 11:57:49
+## 10 109   Bariatric Surgery Servi~ NHS Hospital Activity Tre~ 2021-04-19 11:57:49</code></pre>
 <p>Not all lookups will have associated national code tables, if they are not returned you will receive a message saying the lookup table is not available for this NHS Data Dictionary type.</p>
 </div>
 <div id="using-my-lookup-with-nhs-data" class="section level2">
 <h2><span class="header-section-number">5.2</span> Using my lookup with NHS data</h2>
 <p>There are common lookups that are needed, and this is one such mapping between specialty code, to get the description of the specialty unit description. I will show an example with a made up data frame to illustrate the use case for these lookups and to have up to date lookups:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>act_aggregations &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">SpecCode =</span> <span class="kw">as.character</span>(<span class="kw">c</span>(<span class="dv">101</span>,<span class="dv">102</span>,<span class="dv">103</span>, <span class="dv">104</span>, <span class="dv">105</span>)),</span>
-<span id="cb17-2"><a href="#cb17-2"></a>                             <span class="dt">ActivityCounts =</span> <span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>,<span class="dv">250</span>,<span class="dv">3</span>),<span class="dv">0</span>), </span>
-<span id="cb17-3"><a href="#cb17-3"></a>                             <span class="dt">Month =</span> <span class="kw">rep</span>(<span class="st">&quot;May&quot;</span>, <span class="dv">5</span>))</span>
-<span id="cb17-4"><a href="#cb17-4"></a></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="co"># Use dplyr to join the NHS activity by specialty code</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a></span>
-<span id="cb17-7"><a href="#cb17-7"></a>act_aggregations <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="st">  </span><span class="kw">left_join</span>(merged_frame, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;SpecCode&quot;</span>=<span class="st">&quot;Code&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>act_aggregations &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">SpecCode =</span> <span class="kw">as.character</span>(<span class="kw">c</span>(<span class="dv">101</span>,<span class="dv">102</span>,<span class="dv">103</span>, <span class="dv">104</span>, <span class="dv">105</span>)),</span>
+<span id="cb10-2"><a href="#cb10-2"></a>                             <span class="dt">ActivityCounts =</span> <span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>,<span class="dv">250</span>,<span class="dv">3</span>),<span class="dv">0</span>), </span>
+<span id="cb10-3"><a href="#cb10-3"></a>                             <span class="dt">Month =</span> <span class="kw">rep</span>(<span class="st">&quot;May&quot;</span>, <span class="dv">5</span>))</span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co"># Use dplyr to join the NHS activity by specialty code</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a>act_aggregations <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="st">  </span><span class="kw">left_join</span>(national_codes, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;SpecCode&quot;</span>=<span class="st">&quot;Code&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 6
 ##   SpecCode ActivityCounts Month Description    Dict_Type     DttmExtracted      
 ##   &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;         &lt;dttm&gt;             
-## 1 101                 246 May   Urology Servi~ NHS Hospital~ 2021-02-22 16:42:02
-## 2 102                 253 May   Transplant Su~ NHS Hospital~ 2021-02-22 16:42:02
-## 3 103                 251 May   Breast Surger~ NHS Hospital~ 2021-02-22 16:42:02
-## 4 104                 248 May   Colorectal Su~ NHS Hospital~ 2021-02-22 16:42:02
-## 5 105                 249 May   Hepatobiliary~ NHS Hospital~ 2021-02-22 16:42:02</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># This easily joins the lookup on to your data</span></span></code></pre></div>
+## 1 101                 250 May   Urology Servi~ NHS Hospital~ 2021-04-19 11:57:49
+## 2 102                 252 May   Transplant Su~ NHS Hospital~ 2021-04-19 11:57:49
+## 3 103                 250 May   Breast Surger~ NHS Hospital~ 2021-04-19 11:57:49
+## 4 104                 251 May   Colorectal Su~ NHS Hospital~ 2021-04-19 11:57:49
+## 5 105                 251 May   Hepatobiliary~ NHS Hospital~ 2021-04-19 11:57:49</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># This easily joins the lookup on to your data</span></span></code></pre></div>
 <p>The benefit of having it in an R package is that you can instantaneously have a lookup of the most relevant and up to date NHS lookups, replacing the need to have a massive data warehouse to capture this information.</p>
 </div>
 <div id="combine-into-one-function" class="section level2">
 <h2><span class="header-section-number">5.3</span> Combine into one function</h2>
 <p>The routine could be made simpiler by combining into one function:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>merged_frameR &lt;-<span class="st"> </span><span class="cf">function</span>(filter_param){</span>
-<span id="cb20-2"><a href="#cb20-2"></a>  <span class="co"># Filter based on passed parameter</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a>  reduced_tibble &lt;-<span class="st"> </span></span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">filter</span>(nhs_tibble, link_name <span class="op">==</span><span class="st"> </span>filter_param)</span>
-<span id="cb20-5"><a href="#cb20-5"></a>  </span>
-<span id="cb20-6"><a href="#cb20-6"></a>  <span class="co"># Use NHSDataDictionaRy to return the codes needed for default and national</span></span>
-<span id="cb20-7"><a href="#cb20-7"></a>  national_codes &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">tableR</span>(<span class="dt">url=</span>reduced_tibble<span class="op">$</span>full_url,</span>
-<span id="cb20-8"><a href="#cb20-8"></a>                           <span class="dt">xpath =</span> reduced_tibble<span class="op">$</span>xpath_nat_code, </span>
-<span id="cb20-9"><a href="#cb20-9"></a>                           <span class="dt">title =</span> <span class="kw">paste</span>(filter_param, <span class="st">&quot; - NATIONAL CODES&quot;</span>))</span>
-<span id="cb20-10"><a href="#cb20-10"></a>  </span>
-<span id="cb20-11"><a href="#cb20-11"></a>  default_codes   &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">tableR</span>(<span class="dt">url=</span>reduced_tibble<span class="op">$</span>full_url,</span>
-<span id="cb20-12"><a href="#cb20-12"></a>                      <span class="dt">xpath =</span> reduced_tibble<span class="op">$</span>xpath_default_code, </span>
-<span id="cb20-13"><a href="#cb20-13"></a>                      <span class="dt">title =</span> <span class="kw">paste</span>(filter_param, <span class="st">&quot; - DEFAULT CODES&quot;</span>))</span>
-<span id="cb20-14"><a href="#cb20-14"></a>  </span>
-<span id="cb20-15"><a href="#cb20-15"></a>  <span class="co"># Check whether the national codes or default codes return anything</span></span>
-<span id="cb20-16"><a href="#cb20-16"></a>  <span class="cf">if</span> (<span class="kw">length</span>(national_codes)<span class="op">&gt;</span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="kw">length</span>(default_codes)<span class="op">&gt;</span><span class="dv">0</span>){</span>
-<span id="cb20-17"><a href="#cb20-17"></a>    merged_frame &lt;-<span class="st"> </span>national_codes <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb20-18"><a href="#cb20-18"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">bind_rows</span>(default_codes)</span>
-<span id="cb20-19"><a href="#cb20-19"></a>    <span class="co"># Return the merged frame if this condition is passed</span></span>
-<span id="cb20-20"><a href="#cb20-20"></a>    <span class="kw">return</span>(merged_frame)</span>
-<span id="cb20-21"><a href="#cb20-21"></a>    </span>
-<span id="cb20-22"><a href="#cb20-22"></a>  } <span class="cf">else</span>{</span>
-<span id="cb20-23"><a href="#cb20-23"></a>    <span class="kw">stop</span>(<span class="st">&quot;No lookup exists for this code set&quot;</span>)</span>
-<span id="cb20-24"><a href="#cb20-24"></a>    <span class="co"># Kill the function</span></span>
-<span id="cb20-25"><a href="#cb20-25"></a>  }</span>
-<span id="cb20-26"><a href="#cb20-26"></a></span>
-<span id="cb20-27"><a href="#cb20-27"></a></span>
-<span id="cb20-28"><a href="#cb20-28"></a>}</span>
-<span id="cb20-29"><a href="#cb20-29"></a></span>
-<span id="cb20-30"><a href="#cb20-30"></a></span>
-<span id="cb20-31"><a href="#cb20-31"></a><span class="co"># Use the function we have created to pass the name of the lookup</span></span>
-<span id="cb20-32"><a href="#cb20-32"></a><span class="kw">tail</span>(<span class="kw">merged_frameR</span>(<span class="st">&quot;ACTIVITY TREATMENT FUNCTION CODE&quot;</span>), <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>merged_frameR &lt;-<span class="st"> </span><span class="cf">function</span>(filter_param){</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="co"># Filter based on passed parameter</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  reduced_tibble &lt;-<span class="st"> </span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">filter</span>(nhs_tibble, link_name <span class="op">==</span><span class="st"> </span>filter_param)</span>
+<span id="cb13-5"><a href="#cb13-5"></a>  </span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="co"># Use NHSDataDictionaRy to return the codes needed for default and national</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>  national_codes &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">tableR</span>(<span class="dt">url=</span>reduced_tibble<span class="op">$</span>full_url,</span>
+<span id="cb13-8"><a href="#cb13-8"></a>                           <span class="dt">xpath =</span> reduced_tibble<span class="op">$</span>xpath_nat_code, </span>
+<span id="cb13-9"><a href="#cb13-9"></a>                           <span class="dt">title =</span> <span class="kw">paste</span>(filter_param, <span class="st">&quot; - NATIONAL CODES&quot;</span>))</span>
+<span id="cb13-10"><a href="#cb13-10"></a></span>
+<span id="cb13-11"><a href="#cb13-11"></a>}</span>
+<span id="cb13-12"><a href="#cb13-12"></a></span>
+<span id="cb13-13"><a href="#cb13-13"></a></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="co"># Use the function we have created to pass the name of the lookup</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="kw">tail</span>(<span class="kw">merged_frameR</span>(<span class="st">&quot;ACTIVITY TREATMENT FUNCTION CODE&quot;</span>), <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 4
-##    Code  Description                   Dict_Type             DttmExtracted      
-##    &lt;chr&gt; &lt;chr&gt;                         &lt;chr&gt;                 &lt;dttm&gt;             
-##  1 663   Podiatric Surgery Service     ACTIVITY TREATMENT F~ 2021-02-22 16:42:03
-##  2 670   Urological Physiology Service ACTIVITY TREATMENT F~ 2021-02-22 16:42:03
-##  3 673   Vascular Physiology Service   ACTIVITY TREATMENT F~ 2021-02-22 16:42:03
-##  4 675   Cardiac Physiology Service    ACTIVITY TREATMENT F~ 2021-02-22 16:42:03
-##  5 677   Gastrointestinal Physiology ~ ACTIVITY TREATMENT F~ 2021-02-22 16:42:03
-##  6 840   Audiology Service             ACTIVITY TREATMENT F~ 2021-02-22 16:42:03
-##  7 920   Diabetic Education Service    ACTIVITY TREATMENT F~ 2021-02-22 16:42:03
-##  8 990   Retired but retained for his~ ACTIVITY TREATMENT F~ 2021-02-22 16:42:03
-##  9 199   Non-UK provider; TREATMENT F~ ACTIVITY TREATMENT F~ 2021-02-22 16:42:03
-## 10 499   Non-UK provider; TREATMENT F~ ACTIVITY TREATMENT F~ 2021-02-22 16:42:03</code></pre>
+##    Code  Description               Dict_Type                 DttmExtracted      
+##    &lt;chr&gt; &lt;chr&gt;                     &lt;chr&gt;                     &lt;dttm&gt;             
+##  1 661   Music Therapy Service     ACTIVITY TREATMENT FUNCT~ 2021-04-19 11:57:49
+##  2 662   Optometry Service         ACTIVITY TREATMENT FUNCT~ 2021-04-19 11:57:49
+##  3 663   Podiatric Surgery Service ACTIVITY TREATMENT FUNCT~ 2021-04-19 11:57:49
+##  4 670   Urological Physiology Se~ ACTIVITY TREATMENT FUNCT~ 2021-04-19 11:57:49
+##  5 673   Vascular Physiology Serv~ ACTIVITY TREATMENT FUNCT~ 2021-04-19 11:57:49
+##  6 675   Cardiac Physiology Servi~ ACTIVITY TREATMENT FUNCT~ 2021-04-19 11:57:49
+##  7 677   Gastrointestinal Physiol~ ACTIVITY TREATMENT FUNCT~ 2021-04-19 11:57:49
+##  8 840   Audiology Service         ACTIVITY TREATMENT FUNCT~ 2021-04-19 11:57:49
+##  9 920   Diabetic Education Servi~ ACTIVITY TREATMENT FUNCT~ 2021-04-19 11:57:49
+## 10 990   Retired but retained for~ ACTIVITY TREATMENT FUNCT~ 2021-04-19 11:57:49</code></pre>
 </div>
 </div>
 <div id="xpathtextr-function" class="section level1">
 <h1><span class="header-section-number">6</span> xpathTextR function</h1>
 <p>This function has been provided to return elements from a website, other than html tables, as these functions predominately work with tables. The below example shows how this can be implemented, but requires the retrieval of the xpath via the Inspect command in Google Chrome (CTRL + SHIFT + I):</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>url &lt;-<span class="st"> &quot;https://datadictionary.nhs.uk/data_elements/abbreviated_mental_test_score.html&quot;</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>xpath_element &lt;-<span class="st"> &#39;//*[@id=&quot;element_abbreviated_mental_test_score.description&quot;]&#39;</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a></span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="co"># Run the xpathTextR function to retrieve details of the element retrieved</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a></span>
-<span id="cb22-6"><a href="#cb22-6"></a>result_list &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">xpathTextR</span>(url, xpath_element)</span>
-<span id="cb22-7"><a href="#cb22-7"></a><span class="kw">print</span>(result_list)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>url &lt;-<span class="st"> &quot;https://datadictionary.nhs.uk/data_elements/abbreviated_mental_test_score.html&quot;</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>xpath_element &lt;-<span class="st"> &#39;//*[@id=&quot;element_abbreviated_mental_test_score.description&quot;]&#39;</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Run the xpathTextR function to retrieve details of the element retrieved</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a></span>
+<span id="cb15-6"><a href="#cb15-6"></a>result_list &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">xpathTextR</span>(url, xpath_element)</span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="kw">print</span>(result_list)</span></code></pre></div>
 <pre><code>## $result
 ## [1] &quot;Description\n  \n  \n  \n    \n      ABBREVIATED MENTAL TEST SCORE\n is the \n              PERSON SCORE\n where the \n              ASSESSMENT TOOL TYPE\n is \n              &#39;Abbreviated Mental Test Score&#39;.        \n    The score is in the range 0 to 10.\n  \n\n&quot;
 ## 
@@ -1899,50 +1848,65 @@ div.tocify {
 ## [2] &lt;body class=&quot;wh_topic_page frmBody&quot;&gt;\n        &lt;a href=&quot;#wh_topic_body&quot; cl ...
 ## 
 ## $datetime_access
-## [1] &quot;2021-02-22 16:42:03 GMT&quot;
+## [1] &quot;2021-04-19 11:57:49 BST&quot;
 ## 
 ## $person_accessed
 ## [1] &quot;GARYH - LAPTOP-GE3S96EI&quot;</code></pre>
 <div id="cleaning-the-text-example" class="section level2">
 <h2><span class="header-section-number">6.1</span> Cleaning the text example</h2>
 <p>The example below shows how the text could be cleaned once it is retrieved:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Use the returned result and do some text processing</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>clean_text &lt;-<span class="st"> </span><span class="kw">trimws</span>(<span class="kw">unlist</span>(result_list<span class="op">$</span>result))</span>
-<span id="cb24-3"><a href="#cb24-3"></a>clean_text &lt;-<span class="st"> </span>clean_text <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="st">  </span><span class="kw">gsub</span>(<span class="st">&quot;[</span><span class="ch">\r\n</span><span class="st">]&quot;</span>, <span class="st">&quot;&quot;</span>, .) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Remove new line and breaks</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a><span class="st">  </span><span class="kw">trimws</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Get rid of any white space</span></span>
-<span id="cb24-6"><a href="#cb24-6"></a><span class="st">  </span><span class="kw">as.character</span>() <span class="co">#Cast to a character vector</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a></span>
-<span id="cb24-8"><a href="#cb24-8"></a><span class="kw">print</span>(clean_text)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Use the returned result and do some text processing</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>clean_text &lt;-<span class="st"> </span><span class="kw">trimws</span>(<span class="kw">unlist</span>(result_list<span class="op">$</span>result))</span>
+<span id="cb17-3"><a href="#cb17-3"></a>clean_text &lt;-<span class="st"> </span>clean_text <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="st">  </span><span class="kw">gsub</span>(<span class="st">&quot;[</span><span class="ch">\r\n</span><span class="st">]&quot;</span>, <span class="st">&quot;&quot;</span>, .) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Remove new line and breaks</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="st">  </span><span class="kw">trimws</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#Get rid of any white space</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="st">  </span><span class="kw">as.character</span>() <span class="co">#Cast to a character vector</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="kw">print</span>(clean_text)</span></code></pre></div>
 <pre><code>## [1] &quot;Description                ABBREVIATED MENTAL TEST SCORE is the               PERSON SCORE where the               ASSESSMENT TOOL TYPE is               &#39;Abbreviated Mental Test Score&#39;.            The score is in the range 0 to 10.&quot;</code></pre>
 </div>
 <div id="manipulating-the-text-with-excel-like-string-functions" class="section level2">
 <h2><span class="header-section-number">6.2</span> Manipulating the text with Excel like string functions</h2>
 <p>These functions have been created for users transitioning from Excel to R:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Use the left_xl function to extract the first 11 characters</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>left_clean &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">left_xl</span>(clean_text, <span class="dv">11</span>)</span>
-<span id="cb26-3"><a href="#cb26-3"></a><span class="kw">print</span>(left_clean)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Use the left_xl function to extract the first 11 characters</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>left_clean &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">left_xl</span>(clean_text, <span class="dv">11</span>)</span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">print</span>(left_clean)</span></code></pre></div>
 <pre><code>## [1] &quot;Description&quot;</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Use the right string to extract the score range</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>right_clean &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">right_xl</span>(clean_text, <span class="dv">8</span>)</span>
-<span id="cb28-3"><a href="#cb28-3"></a><span class="kw">print</span>(right_clean)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Use the right string to extract the score range</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>right_clean &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">right_xl</span>(clean_text, <span class="dv">8</span>)</span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="kw">print</span>(right_clean)</span></code></pre></div>
 <pre><code>## [1] &quot;0 to 10.&quot;</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co">#Use the mid function to look in the middle of the string</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>mid_clean &lt;-<span class="st"> </span><span class="kw">trimws</span>(NHSDataDictionaRy<span class="op">::</span><span class="kw">mid_xl</span>(clean_text, <span class="dv">15</span>, <span class="dv">42</span>))</span>
-<span id="cb30-3"><a href="#cb30-3"></a><span class="kw">print</span>(mid_clean)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">#Use the mid function to look in the middle of the string</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>mid_clean &lt;-<span class="st"> </span><span class="kw">trimws</span>(NHSDataDictionaRy<span class="op">::</span><span class="kw">mid_xl</span>(clean_text, <span class="dv">15</span>, <span class="dv">42</span>))</span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="kw">print</span>(mid_clean)</span></code></pre></div>
 <pre><code>## [1] &quot;ABBREVIATED MENTAL TEST SCORE&quot;</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co">#Get the text length </span></span>
-<span id="cb32-2"><a href="#cb32-2"></a>full_string &lt;-<span class="st"> </span><span class="kw">len_xl</span>(clean_text)</span>
-<span id="cb32-3"><a href="#cb32-3"></a>mid_clean_len &lt;-<span class="st"> </span><span class="kw">len_xl</span>(mid_clean)</span>
-<span id="cb32-4"><a href="#cb32-4"></a><span class="co">#Print the length of both strings - the original and mid string extracted text</span></span>
-<span id="cb32-5"><a href="#cb32-5"></a><span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;The original string length was: &quot;</span>, full_string, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;The mid_xl cleaned string length is: &quot;</span>, </span>
-<span id="cb32-6"><a href="#cb32-6"></a>          mid_clean_len))</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co">#Get the text length </span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>full_string &lt;-<span class="st"> </span><span class="kw">len_xl</span>(clean_text)</span>
+<span id="cb25-3"><a href="#cb25-3"></a>mid_clean_len &lt;-<span class="st"> </span><span class="kw">len_xl</span>(mid_clean)</span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="co">#Print the length of both strings - the original and mid string extracted text</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;The original string length was: &quot;</span>, full_string, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;The mid_xl cleaned string length is: &quot;</span>, </span>
+<span id="cb25-6"><a href="#cb25-6"></a>          mid_clean_len))</span></code></pre></div>
 <pre><code>## The original string length was: 231
 ## The mid_xl cleaned string length is: 29</code></pre>
 </div>
 </div>
+<div id="working-with-opensafely" class="section level1">
+<h1><span class="header-section-number">7</span> Working with OpenSafely</h1>
+<p>The OpenSafely dataset has been added to the data dictionary - courtesy of Callum Polwart. This utilises functionality in the data dictionary and works as a wrapper for the data dictionary.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>os_list &lt;-<span class="st"> </span>NHSDataDictionaRy<span class="op">::</span><span class="kw">openSafely_listR</span>(<span class="st">&quot;opensafely/ace-inhibitor-medications&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Ace Inhibitor&quot;</span>)</span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="kw">glimpse</span>(os_list)</span></code></pre></div>
+<pre><code>## Rows: 1,096
+## Columns: 6
+## $ type          &lt;chr&gt; &quot;amp&quot;, &quot;amp&quot;, &quot;amp&quot;, &quot;amp&quot;, &quot;amp&quot;, &quot;amp&quot;, &quot;amp&quot;, &quot;amp&quot;, ~
+## $ id            &lt;chr&gt; &quot;2.191211e+16&quot;, &quot;2.192711e+16&quot;, &quot;2.998391e+16&quot;, &quot;2.19124~
+## $ bnf_code      &lt;chr&gt; &quot;0205051AAAAAAAA&quot;, &quot;0205051AAAAAAAA&quot;, &quot;0205051AAAAAAAA&quot;,~
+## $ nm            &lt;chr&gt; &quot;Perindopril tosilate 2.5mg tablets (Teva UK Ltd)&quot;, &quot;Per~
+## $ Dict_Type     &lt;chr&gt; &quot;Ace Inhibitor&quot;, &quot;Ace Inhibitor&quot;, &quot;Ace Inhibitor&quot;, &quot;Ace ~
+## $ DttmExtracted &lt;dttm&gt; 2021-04-19 11:57:51, 2021-04-19 11:57:51, 2021-04-19 11~</code></pre>
+<p>With this simple wrapper you can pull back the relevant items from the OpenSafely dataset.</p>
+</div>
 <div id="wrapping-up" class="section level1">
-<h1><span class="header-section-number">7</span> Wrapping up</h1>
+<h1><span class="header-section-number">8</span> Wrapping up</h1>
 <p>More functionality continues to be added to this package, so make sure that you keep up to date with the new developments. CRAN will automatically pull the most recent version down from the website.</p>
 <p>This package would not be possible without the funding and support of the NHS-R community. A big thanks to all the team there.</p>
 <p><br> <a href="https://nhsrcommunity.com/"><img src="data:image/png;base64,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"></a> </br></p>
