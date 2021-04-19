@@ -39,6 +39,6 @@ If you have enjoyed this webinar then please drop me a line at [@StatsGary](http
 
 I am currently working as the Head of Advanced Analytics for [Arden and Greater East Midlands CSU](https://www.ardengemcsu.nhs.uk/) and I would be happy to take any questions via email: <g.hutson@nhs.net>.
 
-![](man/figures/nhsr.png)
+![](man/figures/NHSRComm.png)
 
 
