@@ -1,7 +1,7 @@
 # NHSDataDictionaRy webinar
 
 
-<img src ="man/figures/logobgr.png" align="right">
+<a href ="https://github.com/StatsGary/NHSDataDictionaRy"><img src ="man/figures/logobgr.png" align="right"></a>
 <br></br>
 
 
@@ -40,6 +40,7 @@ If you have enjoyed this webinar then please drop me a line at [@StatsGary](http
 I am currently working as the Head of Advanced Analytics for [Arden and Greater East Midlands CSU](https://www.ardengemcsu.nhs.uk/) and I would be happy to take any questions via email: <g.hutson@nhs.net>.
 
 <img src="man/figures/NHSRComm.png" alt="NHS-R Community Website" height="75px" width="150px">
+<img src="">
 
 
 
